@@ -1,10 +1,3 @@
 pandas
 numpy
 streamlit
-# finance-datareader
-# plotly
-# seaborn
-# matplotlib
-# folium
-# streamlit-folium
-# bokeh==2.4.1
