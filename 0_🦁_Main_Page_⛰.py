@@ -2,6 +2,47 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
+
+# section 함수
+def section(text):
+    html = f"""
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        <br/>
+        <div style="
+            width:200px;
+            background: rgb(220,172,255);
+            background: linear-gradient(20deg, rgba(220,172,255,1) 0%, rgba(105,146,230,1) 100%);
+            padding:7px;
+            border:none;
+            border-radius:10px;
+        ">
+            <h4 style="padding:4px;color:white;cursor:default;">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                &nbsp;{text}
+            </h4>
+        </div>
+    """
+    return st.markdown(html, unsafe_allow_html=True)
+
+
+# callout text 함수
+def callout(text_list):
+    html = """
+        <div style="
+            background-color:#eee;
+            color:#666;
+            padding: 20px;
+            border-radius:3px;
+            margin-top: 7px;
+            box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.125);
+        ">
+        """
+    for text in text_list:
+        html += f'<span>{text}</span><br/>'
+    html += "</div>"
+    return st.markdown(html, unsafe_allow_html=True)
+
+
 # 전체 페이지 설정
 st.set_page_config(
     page_title="사자동산의 데이터 분석 페이지",  # 전체 타이틀
@@ -14,17 +55,23 @@ st.set_page_config(
     }
 )
 
-st.balloons()
 
-st.title('보험료 데이터 회귀 분석')
+st.balloons() # 풍선 효과
+st.title('보험료 데이터 회귀 분석') # title
 
-section1 = """
-<div style="background-color: #2e6595;padding:5px;">
-    <h4 style="padding:4px;color:white;">개요</h4>
-</div>
-"""
-st.markdown(section1, unsafe_allow_html=True)
 
+# 개요 section
+section('개요')
+callout(['안녕하세요!', '간략한 프로젝트 개요 설명입니다.'])
+
+
+# other section ...
+section('데이터 출처')
+section('분석 방향')
+section('결과')
+
+
+# texi
 # DATE_COLUMN = 'date/time'
 # DATA_URL = ('https://s3-us-west-2.amazonaws.com/'
 #             'streamlit-demo-data/uber-raw-data-sep14.csv.gz')
