@@ -4,8 +4,8 @@ import numpy as np
 
 # 전체 페이지 설정
 st.set_page_config(
-    page_title="정아의 데이터 분석 페이지",  # 전체 타이틀
-    page_icon="chart_with_upwards_trend",  # 아이콘
+    page_title="사자동산의 데이터 분석 페이지",  # 전체 타이틀
+    page_icon="🦁",  # 아이콘
     initial_sidebar_state="expanded",  # 왼쪽 사이드바
     menu_items={
         'Get Help': 'https://www.extremelycoolapp.com/help',
@@ -16,11 +16,11 @@ st.set_page_config(
 
 st.balloons()
 
-st.title('안녕!')
+st.title('보험료 데이터 회귀 분석')
 
 section1 = """
-<div style="background-color: #e43f3f;padding:5px;">
-    <h4 style="padding:4px;color:white;">폐기물 현황 분석 및 위험지역 선정</h4>
+<div style="background-color: #2e6595;padding:5px;">
+    <h4 style="padding:4px;color:white;">개요</h4>
 </div>
 """
 st.markdown(section1, unsafe_allow_html=True)
