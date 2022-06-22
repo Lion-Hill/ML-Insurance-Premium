@@ -22,14 +22,19 @@ def load_data(nrows):
     return data
 
 
+# data 로드
 data_load_state = st.text('Loading data...')
 data = load_data(1000)
 data_load_state.text("")
 
+
+# insurance raw data load section
 section("Insurance Data", 250)
 with st.expander("Insurance Premium Raw Data 보기 🔍"):
     st.table(data)
 callout(['보험료 데이터'])
 line_break()
 
+
+# column 소개 section
 section("Column")
