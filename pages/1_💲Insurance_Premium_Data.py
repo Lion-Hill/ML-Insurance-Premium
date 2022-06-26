@@ -1,14 +1,13 @@
-"""
-0. 간략 개요
-1. 데이터 소개 + 컬럼 소개
-2. EDA 인사이트 + 방향성
-3. 시각화
-4. 모델링
-"""
 import streamlit as st
 import pandas as pd
 import numpy as np
-from html_module import section, callout, line_break
+from html_module import section, callout, line_break, title
+
+
+st.set_page_config(
+    page_title="Data | 사자동산",  # 전체 타이틀
+    page_icon="🦁",  # 아이콘
+)
 
 
 # 데이터 프레임 가져오기
@@ -32,9 +31,20 @@ data_load_state.text("")
 section("Insurance Data", 250)
 with st.expander("Insurance Premium Raw Data 보기 🔍"):
     st.table(data)
-callout(['보험료 데이터'])
 line_break()
 
 
 # column 소개 section
 section("Column")
+callout(['Kaggle - Insurance Premium DataSet의 컬럼 입니다.'])
+# line_break()
+columns_text = [
+    ['age', 'The Age of the policyholder'],
+    ['sex', ' The Gender of the policyholder'],
+    ['bmi', 'The Body Mass Index of the Policyholder'],
+    ['children', 'Number of Children of the Policyholder'],
+    ['smoker', 'A Column whether the Policyholder is Smoker or No Smoker'],
+    ['region', 'The Region where the Policyholder belongs to'],
+    ['charges', 'The Premium Charged to the Policyholder', ]
+]
+st.table(pd.DataFrame(columns_text, columns=['title', 'description']))

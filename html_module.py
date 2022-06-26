@@ -1,6 +1,20 @@
 import streamlit as st
 
 
+# title 함수
+def title(text):
+    html = f"""
+        <h2 style='
+            color:rgba(105,146,230,1);
+            font-weight:bold;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
+        '>
+            {text}
+        </h2>
+    """
+    return st.markdown(html, unsafe_allow_html=True)
+
+
 # section 함수
 def section(text, width=200):
     html = f"""
@@ -16,10 +30,10 @@ def section(text, width=200):
             margin-bottom:10px;
             box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.125);
         ">
-            <h4 style="padding:4px;color:white;cursor:default;">
+            <h5 style="padding:4px;color:white;cursor:default;">
                 <i class="fa-solid fa-magnifying-glass"></i>
                 &nbsp;{text}
-            </h4>
+            </h5>
         </div>
     """
     return st.markdown(html, unsafe_allow_html=True)

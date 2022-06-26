@@ -1,7 +1,8 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-from html_module import section, callout
+from html_module import line_break, section, callout
+from PIL import Image
 
 
 # 전체 페이지 설정
@@ -23,46 +24,22 @@ st.title('보험료 데이터 회귀 분석')  # title
 
 # 개요 section
 section('개요')
-callout(['안녕하세요!', '간략한 프로젝트 개요 설명입니다.'])
-
+image = Image.open('images/main.png')
+st.image(image,)
+callout([
+    '안녕하세요! 사자동산의 미니 프로젝트 페이지 입니다.',
+    '저희는 Kaggle의 보험료 데이터 회귀 예측을 했습니다.'
+])
+line_break()
 
 # other section ...
 section('데이터 출처')
-section('분석 방향')
-section('결과')
+link = 'https://www.kaggle.com/datasets/simranjain17/insurance'
+st.markdown(link, unsafe_allow_html=True)
+st.caption('Kaggle Insurance Premium Data 페이지로 이동하기')
+line_break()
 
-
-# texi
-# DATE_COLUMN = 'date/time'
-# DATA_URL = ('https://s3-us-west-2.amazonaws.com/'
-#             'streamlit-demo-data/uber-raw-data-sep14.csv.gz')
-
-
-# @st.cache
-# def load_data(nrows):
-#     data = pd.read_csv(DATA_URL, nrows=nrows)
-#     def lowercase(x): return str(x).lower()
-#     data.rename(lowercase, axis='columns', inplace=True)
-#     data[DATE_COLUMN] = pd.to_datetime(data[DATE_COLUMN])
-#     return data
-
-
-# data_load_state = st.text('Loading data...')
-# data = load_data(10000)
-# data_load_state.text("Done! (using st.cache)")
-
-# if st.checkbox('Show raw data'):
-#     st.subheader('Raw data')
-#     st.write(data)
-
-# st.subheader('Number of pickups by hour')
-# hist_values = np.histogram(
-#     data[DATE_COLUMN].dt.hour, bins=24, range=(0, 24))[0]
-# st.bar_chart(hist_values)
-
-# # Some number in the range 0-23
-# hour_to_filter = st.slider('hour', 0, 23, 17)
-# filtered_data = data[data[DATE_COLUMN].dt.hour == hour_to_filter]
-
-# st.subheader('Map of all pickups at %s:00' % hour_to_filter)
-# st.map(filtered_data)
+section('팀 노션')
+notion_link = 'https://www.notion.so/Kaggle-ca13e0f8b55648f7a12d0d68e3344552'
+st.markdown(notion_link, unsafe_allow_html=True)
+st.caption('미니 프로젝트 노션 페이지로 이동하기')
