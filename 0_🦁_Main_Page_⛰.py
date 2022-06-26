@@ -43,3 +43,8 @@ section('팀 노션')
 notion_link = 'https://www.notion.so/Kaggle-ca13e0f8b55648f7a12d0d68e3344552'
 st.markdown(notion_link, unsafe_allow_html=True)
 st.caption('미니 프로젝트 노션 페이지로 이동하기')
+
+import sklearn
+import lightgbm
+print(sklearn.__version__)
+print(lightgbm.__version__)

@@ -9,6 +9,7 @@ from sklearn.metrics import mean_absolute_error
 from sklearn.metrics import mean_squared_log_error
 
 
+
 st.set_page_config(
     page_title="Modeling | 사자동산",  # 전체 타이틀
     page_icon="🦁",  # 아이콘
@@ -110,7 +111,11 @@ if model_btn:
     X_train, X_test, y_train, y_test = dataset_load()
     params = set_params(learning_rate, seed, metric,
                         max_depth, n_estimators, subsample)
+
+    lgb_model_state = st.text('Loading...')
     lgb_model = train_lgb(X_train, X_test, y_train, y_test, params)
+    lgb_model_state.success("모델링 완료")
+
     y_predict = lgb_model.predict(X_test)
     loss = set_loss(y_test, y_predict)
     print_loss(loss)
