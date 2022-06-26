@@ -8,6 +8,7 @@ st.set_page_config(
     page_title="Data | 사자동산",  # 전체 타이틀
     page_icon="🦁",  # 아이콘
 )
+title('Data')
 
 
 # 데이터 프레임 가져오기

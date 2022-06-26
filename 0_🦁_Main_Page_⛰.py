@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-from html_module import line_break, section, callout
+from html_module import line_break, section, callout, title
 from PIL import Image
 
 
@@ -19,7 +19,8 @@ st.set_page_config(
 
 
 st.balloons()  # 풍선 효과
-st.title('보험료 데이터 회귀 분석')  # title
+title('보험료 데이터 회귀 분석')
+# st.title('보험료 데이터 회귀 분석')  # title
 
 
 # 개요 section
