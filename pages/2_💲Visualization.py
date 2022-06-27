@@ -10,6 +10,8 @@ st.set_page_config(
     page_title="Visualization | 사자동산",  # 전체 타이틀
     page_icon="🦁",  # 아이콘
 )
+title('Visualization')
+
 
 # 데이터 프레임 가져오기
 DATA_URL = 'data/insurance.csv'
@@ -86,8 +88,8 @@ def category_graph(col):
     page = st.sidebar.selectbox(
         "📊 그래프를 선택해주세요",
         [
-            "Count Plot",
             "Bar Plot",
+            "Count Plot",
         ]
     )
 
@@ -117,7 +119,6 @@ def main():
         category_graph(col.lower())
 
 
-title('Visualization')
 callout(['charges와 비교합니다.'])
 line_break()
 main()

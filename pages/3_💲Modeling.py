@@ -14,10 +14,12 @@ st.set_page_config(
     page_title="Modeling | 사자동산",  # 전체 타이틀
     page_icon="🦁",  # 아이콘
 )
+title('Modeling')
 
 
 # 데이터셋 로드 함수
-def dataset_load():
+@st.cache
+def data_load():
     X_train = pd.read_csv('data/X_train.csv')
     y_train = pd.read_csv('data/y_train.csv')
     X_test = pd.read_csv('data/X_test.csv')
@@ -39,10 +41,16 @@ def set_params(learning_rate, seed, metric, max_depth, n_estimators, subsample):
     return params
 
 
-# lgb 학습 함수
-def train_lgb(X_train, X_test, y_train, y_test, params):
+# 데이터셋 로드 함수
+# @st.cache
+def dataset_load(X_train, X_test, y_train, y_test):
     train_dataset = lgb.Dataset(X_train, y_train)
     test_dataset = lgb.Dataset(X_test, y_test)
+    return train_dataset, test_dataset
+
+
+# lgb 학습 함수
+def train_lgb(train_dataset, test_dataset, params):
     lgb_model = lgb.train(
         params, train_dataset, 10000, test_dataset,
         verbose_eval=500, early_stopping_rounds=100
@@ -79,8 +87,6 @@ def print_re_graph(y_test, y_predict):
     st.pyplot(fig)
 
 
-title('Modeling')
-
 section('개요')
 callout(['LightGBM 사용'])
 line_break()
@@ -107,17 +113,19 @@ with col2:
 line_break()
 model_btn = st.button('모델링 Start')
 line_break()
-X_train, X_test, y_train, y_test = dataset_load()   
+X_train, X_test, y_train, y_test = data_load()
+train_dataset, test_dataset = dataset_load(X_train, X_test, y_train, y_test)
+
 if model_btn:
     params = set_params(learning_rate, seed, metric,
                         max_depth, n_estimators, subsample)
 
     # my_bar = st.progress(0)
     lgb_model_state = st.text('Loading...')
-    lgb_model = train_lgb(X_train, X_test, y_train, y_test, params)
+    lgb_model = train_lgb(train_dataset, test_dataset, params)
     # for percent_complete in range(100):
-        # time.sleep(0.1)
-        # my_bar.progress(percent_complete + 1)
+    # time.sleep(0.1)
+    # my_bar.progress(percent_complete + 1)
     lgb_model_state.success("모델링 완료")
 
     y_predict = lgb_model.predict(X_test)
@@ -125,6 +133,3 @@ if model_btn:
     print_loss(loss)
     with st.expander("손실함수 그래프 보기 🔍"):
         print_re_graph(y_test, y_predict)
-
-
-
