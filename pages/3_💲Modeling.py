@@ -121,7 +121,7 @@ if model_btn:
                         max_depth, n_estimators, subsample)
 
     # my_bar = st.progress(0)
-    lgb_model_state = st.text('Loading...')
+    lgb_model_state = st.text('2분은 족히 넘게 걸립니다. 조금만 기다려 주세요 Loading...')
     lgb_model = train_lgb(train_dataset, test_dataset, params)
     # for percent_complete in range(100):
     # time.sleep(0.1)
