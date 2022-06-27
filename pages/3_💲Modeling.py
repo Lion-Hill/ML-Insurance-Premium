@@ -2,12 +2,12 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import time
 from html_module import section, callout, line_break, title
 import lightgbm as lgb
 from sklearn.metrics import mean_squared_error
 from sklearn.metrics import mean_absolute_error
 from sklearn.metrics import mean_squared_log_error
-
 
 
 st.set_page_config(
@@ -107,13 +107,17 @@ with col2:
 line_break()
 model_btn = st.button('모델링 Start')
 line_break()
+X_train, X_test, y_train, y_test = dataset_load()   
 if model_btn:
-    X_train, X_test, y_train, y_test = dataset_load()
     params = set_params(learning_rate, seed, metric,
                         max_depth, n_estimators, subsample)
 
+    # my_bar = st.progress(0)
     lgb_model_state = st.text('Loading...')
     lgb_model = train_lgb(X_train, X_test, y_train, y_test, params)
+    # for percent_complete in range(100):
+        # time.sleep(0.1)
+        # my_bar.progress(percent_complete + 1)
     lgb_model_state.success("모델링 완료")
 
     y_predict = lgb_model.predict(X_test)
@@ -123,11 +127,4 @@ if model_btn:
         print_re_graph(y_test, y_predict)
 
 
-# section('손실함수 그래프')
-# graph_btn = st.button('그래프 그려보기')
-# line_break()
-# if graph_btn:
-#     if not y_predict:
-#         st.info('먼저 모델링을 실행해주세요')
-#     else:
-#         print_re_graph(y_test, y_predict)
+
